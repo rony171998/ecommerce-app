@@ -82,9 +82,6 @@ const Home = () => {
                     </Row>
                 </Col>
             </Row>
-
-
-
         </div>
     );
 };
