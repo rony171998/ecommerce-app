@@ -20,7 +20,7 @@ const Home = () => {
 
         axios.get("https://news-app-academlo.herokuapp.com/categories/")
             .then(res => setCategories(res.data))
-    }, []);
+    }, [dispatch]);
 
     const filterNews = () => {
         dispatch(filterHeadline(search));

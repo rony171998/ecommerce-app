@@ -4,6 +4,7 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import LoadingScreen  from "./components/LoadingScreen";
 import { useSelector } from "react-redux";
+import Nav from "./components/Nav"
 
 function App() {
   const isLoading = useSelector((state) => state.isLoading);
@@ -12,9 +13,9 @@ function App() {
       <Container>
         {isLoading && <LoadingScreen />}
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<><Nav /><Favorites /></>} />
           <Route path="/news/:id" element={<NewsDetail />} />
-          <Route path="/favorites" element={<Favorites />} />
+          <Route path="/favorites" element={<Home />} />
           <Route path="/login" element={<Login />} />
         </Routes>
       </Container>
