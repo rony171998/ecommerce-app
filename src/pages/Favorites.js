@@ -19,7 +19,6 @@ const Favorites = () => {
   return (
     <div>
       <Row>
-        <Card.Title>E-commerce</Card.Title>
 
         <Col lg={3} className="mb-4">
           <h4>Categories</h4>

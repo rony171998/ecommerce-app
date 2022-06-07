@@ -4,22 +4,24 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import LoadingScreen  from "./components/LoadingScreen";
 import { useSelector } from "react-redux";
-import Nav from "./components/Nav"
+import NavBar from "./components/NavBar"
 
 function App() {
   const isLoading = useSelector((state) => state.isLoading);
   return (
     <HashRouter>
+      <NavBar/>
       <Container>
         {isLoading && <LoadingScreen />}
         <Routes>
-          <Route path="/" element={<><Nav /><Favorites /></>} />
+          <Route path="/" element={<Home />} />
           <Route path="/news/:id" element={<NewsDetail />} />
-          <Route path="/favorites" element={<Home />} />
+          <Route path="/favorites" element={<Favorites />} />
           <Route path="/login" element={<Login />} />
         </Routes>
-      </Container>
-    </HashRouter>
+      </Container> 
+    </HashRouter> 
+    
   );
 }
 
