@@ -62,7 +62,7 @@ const Home = () => {
                         </Button>
                     </InputGroup>
 
-                    <Row xs={1} md={2} lg={3} className="g-4">
+                    <Row  lg={3} className="g-4">
                         {
                             news.map(newsItem => (
                                 <Col>

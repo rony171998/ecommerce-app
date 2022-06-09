@@ -1,2 +1,3 @@
-export {default as Nav} from "./NavBar";
-export {default as LoafingScreen} from "./LoadingScreen";
+export {default as NavBar} from "./NavBar";
+export {default as LoadingScreen} from "./LoadingScreen";
+export {default as ProtectedRoutes} from "./ProtectedRoutes";
