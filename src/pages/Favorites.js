@@ -20,7 +20,7 @@ const Favorites = () => {
 
     axios.get("https://ecommerce-api-react.herokuapp.com/api/v1/products/categories")
       .then(res => setCategories(res.data.data))
-  }, []);
+  }, [dispatch]);
   console.log(categories)
 
   const selectCategory = (id) => {

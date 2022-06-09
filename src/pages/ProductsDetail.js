@@ -1,17 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import {  useDispatch } from "react-redux";
 import { filterCategory } from "../store/slices/products.slice";
-import { Button, Card, Col, InputGroup, ListGroup, Row } from 'react-bootstrap';
+import { Button, Card, Col,  ListGroup, Row } from 'react-bootstrap';
 
 const ProductsDetail = () => {
     const [product, setProducts] = useState({});
 
     const { id } = useParams();
     const dispatch = useDispatch();
-
-    const productsList = useSelector((state) => state.products);
 
     useEffect(() => {
         // axios.get(`https://products-app-academlo.herokuapp.com/products/${id}/`)
