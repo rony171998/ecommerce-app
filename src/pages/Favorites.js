@@ -28,10 +28,10 @@ const Favorites = () => {
 
   return (
     <div>
-      <Row>
+      <Row >
 
-        <Col lg={3} className="mb-4">
-          <h4>Categories</h4>
+        <Col lg={3}>
+          <h2>Categories</h2>
           <ListGroup>
 
             {
@@ -50,31 +50,31 @@ const Favorites = () => {
               placeholder="Search products"
             />
             <Button variant="outline-secondary" id="button-addon2" >
-              Button
+              Search
             </Button>
           </InputGroup>
 
           <ListGroup>
-            <Row xs={1} md={2} lg={3} className="g-4">
+            <Row xs={1} md={2} lg={3} >
               {
                 products.map(product => (
                   <Col key={product.id}>
-                    <ListGroup.Item style={{ cursor: "pointer" }} onClick={() => navigate(`/products/${product.id}`)}>
-
-                      <ListGroup>
-                        <Row style={{margin:"10px"}}>
-                          <Col>
-                            <Card.Img src={product.productImgs?.[2]} style={{width:"140px",height:"150px"}}/>
-                          </Col>
-
-                        </Row>
-                      </ListGroup>
+                    <ListGroup.Item >
                       <Card.Title>{product.title}</Card.Title>
-                      <Card.Text> ${product.price}</Card.Text>
+                      <ListGroup style={{ width: "260px", height: "350px" }}>
 
+                        <Row style={{ cursor: "pointer" }} onClick={() => navigate(`/products/${product.id}`)}>
+                          <Col>
+                            <Card.Img src={product.productImgs?.[0]} style={{ width: "260px", height: "250px" }} />
+                          </Col>
+                        </Row>
+
+                        <Card.Footer> ${product.price} USD</Card.Footer>
+                        <Button variant="primary" size="sm">Add Cart</Button>
+
+                      </ListGroup>
                     </ListGroup.Item>
                   </Col>
-
                 ))
               }
             </Row>
@@ -83,16 +83,9 @@ const Favorites = () => {
 
         </Col>
       </Row>
+      
     </div>
   );
 };
-/*
-                <Card.Title>User</Card.Title>
-                <Card.Text>{product.user.firstName} {product.user.lastName}</Card.Text>
-                <Card.Text>{product.user.email}</Card.Text>
-                <Card.Text>{product.user.phone}</Card.Text>
-                <Card.Text>{product.user.role}</Card.Text>
-                <Card.Text>{product.user.status}</Card.Text>
-*/
 
 export default Favorites;

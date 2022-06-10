@@ -48,7 +48,6 @@ const Home = () => {
                     </ListGroup>
                 </Col>
 
-
                 <Col>
                 
                     <InputGroup className="mb-3">

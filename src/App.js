@@ -1,12 +1,10 @@
-import { Home, Favorites, Login, NewsDetail,ProductsDetail } from "./pages";
+import { Home,SignIn, Favorites, Login, NewsDetail,ProductsDetail } from "./pages";
 import "./styles.css";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { LoadingScreen, NavBar, ProtectedRoutes } from "./components";
 import Memo from "./pages/Memo";
-import SignIn from "./pages/SignIn";
-
 
 function App() {
   const isLoading = useSelector((state) => state.isLoading);
