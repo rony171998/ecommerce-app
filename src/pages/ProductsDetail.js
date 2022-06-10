@@ -39,8 +39,8 @@ const ProductsDetail = () => {
                         {
                             product.productImgs?.map(productItem => (
                                 <Col key={productItem}>
-                                    <Card >
-                                        <Card.Img src={productItem} alt="" />
+                                    <Card style={{width:"400px",height:"400px"}}>
+                                        <Card.Img src={productItem} alt=""  />
                                     </Card>
                                 </Col>
                             ))

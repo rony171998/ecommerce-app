@@ -7,7 +7,7 @@ const NavBar = () => {
     return (
         <Navbar style={{height: "content"}} bg="light" expand="lg">
             <Container >
-                <Navbar.Brand href="#home">E-Commerce</Navbar.Brand>
+                <Navbar.Brand href="#/favorites">E-Commerce</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">

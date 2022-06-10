@@ -12,7 +12,7 @@ const Favorites = () => {
   const navigate = useNavigate();
 
   const [categories, setCategories] = useState([]);
-  
+
   const products = useSelector(state => state.products);
 
   useEffect(() => {
@@ -21,11 +21,10 @@ const Favorites = () => {
     axios.get("https://ecommerce-api-react.herokuapp.com/api/v1/products/categories")
       .then(res => setCategories(res.data.data))
   }, [dispatch]);
-  console.log(categories)
 
   const selectCategory = (id) => {
     dispatch(filterCategory(id))
-}
+  }
 
   return (
     <div>
@@ -34,10 +33,10 @@ const Favorites = () => {
         <Col lg={3} className="mb-4">
           <h4>Categories</h4>
           <ListGroup>
-            
+
             {
               categories.categories?.map(category => (
-                
+
                 <ListGroup.Item key={category.id} onClick={() => selectCategory(category.id)}>
                   {category.name}
                 </ListGroup.Item>
@@ -58,34 +57,28 @@ const Favorites = () => {
           <ListGroup>
             <Row xs={1} md={2} lg={3} className="g-4">
               {
-              products.map(product => (
-                <Col key={product.id}>
-                  <ListGroup.Item style={{ cursor: "pointer" }} onClick={() => navigate(`/products/${product.id}`)}>
+                products.map(product => (
+                  <Col key={product.id}>
+                    <ListGroup.Item style={{ cursor: "pointer" }} onClick={() => navigate(`/products/${product.id}`)}>
 
-                    <ListGroup>
-                      <Row>
-                        {
-                        product.productImgs?.map(productItem => (
-                          <Col key={productItem}>
-                            <Card >
-                              <Card.Img src={productItem} alt="" />
-                            </Card>
+                      <ListGroup>
+                        <Row style={{margin:"10px"}}>
+                          <Col>
+                            <Card.Img src={product.productImgs?.[2]} style={{width:"140px",height:"150px"}}/>
                           </Col>
-                        ))
-                      }
-                      </Row>
-                      
-                    </ListGroup>
-                    <Card.Title>{product.title}</Card.Title>
-                    <Card.Text> ${product.price} {product.status}</Card.Text>
 
-                  </ListGroup.Item>
-                </Col>
-                
-              ))
-            }
+                        </Row>
+                      </ListGroup>
+                      <Card.Title>{product.title}</Card.Title>
+                      <Card.Text> ${product.price}</Card.Text>
+
+                    </ListGroup.Item>
+                  </Col>
+
+                ))
+              }
             </Row>
-            
+
           </ListGroup>
 
         </Col>

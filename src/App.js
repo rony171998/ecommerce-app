@@ -4,6 +4,8 @@ import { HashRouter, Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { LoadingScreen, NavBar, ProtectedRoutes } from "./components";
+import Memo from "./pages/Memo";
+import SignIn from "./pages/SignIn";
 
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
           
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/memo" element={<Memo />} />
           <Route element={<ProtectedRoutes />}> 
            <Route path="/news/:id" element={<NewsDetail />} />
            <Route path="/products/:id" element={<ProductsDetail />} />

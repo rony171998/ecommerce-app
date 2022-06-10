@@ -1,20 +1,18 @@
 import React from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
-
   const navigate = useNavigate();
 
   const submit = (data) => {
     axios
       .post("https://ecommerce-api-react.herokuapp.com/api/v1/users/login", data)
       .then((res) => {
-        localStorage.setItem("token", res.data.access);
-        navigate("/");
+        localStorage.setItem("token", res.data.data.token);      
         alert("Sesión iniciada correctamente");
       })
       .catch((error) => {
@@ -29,12 +27,12 @@ const Login = () => {
       <Card style={{ maxWidth: "500px" }} className="mx-auto mt-5">
         <Card.Body>
           <h1>Login
-</h1>
+          </h1>
           <Form onSubmit={handleSubmit(submit)}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label>Test data</Form.Label><br/>
-            <Form.Label>Email: mason@gmail.com</Form.Label><br/>
-            <Form.Label>Password: mason1234</Form.Label><br/>
+              <Form.Label>Test data</Form.Label><br />
+              <Form.Label>Email: mason@gmail.com</Form.Label><br />
+              <Form.Label>Password: mason1234</Form.Label><br />
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 {...register("email")}
@@ -54,15 +52,17 @@ const Login = () => {
                 placeholder="Password"
               />
             </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
+            <Button variant="primary" type="submit" onClick={navigate("/")}>
+              Login
+            </Button><br/>
+            <Form.Label>Don't have an account? </Form.Label>
+            <a href="#/signin"> Sign Up</a>
           </Form>
         </Card.Body>
       </Card>
     </div>
   );
-  
+
 };
 
 export default Login;

@@ -65,7 +65,7 @@ const Home = () => {
                     <Row  lg={3} className="g-4">
                         {
                             news.map(newsItem => (
-                                <Col>
+                                <Col key={newsItem.id}>
                                     <Card style={{ cursor: "pointer" }} onClick={() => navigate(`/news/${newsItem.id}`)}>
                                         <Card.Img variant="top" src={newsItem.image} />
                                         <Card.Body>
