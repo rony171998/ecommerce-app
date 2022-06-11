@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { Button, Card, Col, FormControl, InputGroup, ListGroup, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterCategory, getProducts } from '../store/slices/products.slice';
+import { filterCategory, filterProductsByName, getProducts } from '../store/slices/products.slice';
 
 
 const Favorites = () => {
@@ -12,20 +12,27 @@ const Favorites = () => {
   const navigate = useNavigate();
 
   const [categories, setCategories] = useState([]);
+  const [ search, setSearch ] = useState("");
 
-  const products = useSelector(state => state.products);
+    let products = useSelector(state => state.products);
 
   useEffect(() => {
     dispatch(getProducts());
 
     axios.get("https://ecommerce-api-react.herokuapp.com/api/v1/products/categories")
       .then(res => setCategories(res.data.data))
+
+      
   }, [dispatch]);
 
   const selectCategory = (id) => {
     dispatch(filterCategory(id))
   }
 
+  const searchProduct = (id) => {
+    dispatch(filterProductsByName(id))
+  }
+   
   return (
     <div>
       <Row >
@@ -48,8 +55,10 @@ const Favorites = () => {
           <InputGroup className="mb-4 mt-4">
             <FormControl
               placeholder="Search products"
+              onChange={e => setSearch(e.target.value)}
+              value={search}
             />
-            <Button variant="outline-secondary" id="button-addon2" >
+            <Button variant="outline-secondary" id="button-addon2" onClick={() => searchProduct(search)}>
               Search
             </Button>
           </InputGroup>
@@ -57,7 +66,7 @@ const Favorites = () => {
           <ListGroup>
             <Row xs={1} md={2} lg={3} >
               {
-                products.map(product => (
+                products?.map(product => (
                   <Col key={product.id}>
                     <ListGroup.Item >
                       <Card.Title>{product.title}</Card.Title>
@@ -69,7 +78,7 @@ const Favorites = () => {
                           </Col>
                         </Row>
 
-                        <Card.Footer> ${product.price} USD</Card.Footer>
+                        <Card.Footer>Price ${product.price} USD</Card.Footer>
                         <Button variant="primary" size="sm">Add Cart</Button>
 
                       </ListGroup>
