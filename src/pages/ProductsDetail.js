@@ -7,6 +7,7 @@ import { Button, Card, Col, ListGroup, Row, ToggleButton, ToggleButtonGroup } fr
 
 const ProductsDetail = () => {
     const [product, setProducts] = useState({});
+    const [quantitiesproduct, setQuantitiesProducts] = useState(1);
 
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -22,51 +23,63 @@ const ProductsDetail = () => {
         });
     }, [dispatch, id]);
 
-    
 
-    
+    const subtractQuantitiesProduc = () => {
+        if (quantitiesproduct > 1) {
+            setQuantitiesProducts(quantitiesproduct - 1)
+        }
+    }
+    const addQuantitiesProduc = () => {
+        setQuantitiesProducts(quantitiesproduct + 1)
+    }
+
 
     return (
         <div>
 
             <Card>
                 <ListGroup.Item key={product.id}>
-     
-                        <Row>
-                            <Col>
-                                <Card.Img 
-                                src={product.productImgs?.[value]} 
+
+                    <Row>
+                        <Col>
+                            <Card.Img
+                                src={product.productImgs?.[value]}
                                 style={{ maxwidth: "560px", maxHeight: "550px" }}>
 
-                                </Card.Img>
-                                <ToggleButtonGroup type="checkbox" value={value} >
-                                    <ToggleButton id="toggle-check" onClick={() => setValue(0)}
-                                        type="checkbox" value={1}> 
-                                        Photo 1
-                                    </ToggleButton>
-                                    <ToggleButton id="toggle-check" onClick={ () => setValue(1)}
-                                        type="checkbox" value={2}>
-                                        Photo 2
-                                    </ToggleButton>
-                                    <ToggleButton id="toggle-check" onClick={() => setValue(2)}
-                                        type="checkbox" value={3}>
-                                        Photo 3
-                                    </ToggleButton>
-                                </ToggleButtonGroup>
-                            </Col>
-                            <Col>
-                                <Card.Title>{product.title}</Card.Title>
-                                <Card.Text>Category: {product.category?.name}</Card.Text>
+                            </Card.Img>
+                            <ToggleButtonGroup type="checkbox" value={value} >
+                                <ToggleButton id="toggle-check" onClick={() => setValue(0)}
+                                    type="checkbox" value={1}>
+                                    Photo 1
+                                </ToggleButton>
+                                <ToggleButton id="toggle-check" onClick={() => setValue(1)}
+                                    type="checkbox" value={2}>
+                                    Photo 2
+                                </ToggleButton>
+                                <ToggleButton id="toggle-check" onClick={() => setValue(2)}
+                                    type="checkbox" value={3}>
+                                    Photo 3
+                                </ToggleButton>
+                            </ToggleButtonGroup>
+                        </Col>
+                        <Col>
+                            <Card.Title>{product.title}</Card.Title>
+                            <Card.Text>Category: {product.category?.name}</Card.Text>
 
-                                <Card.Text>Description: {product.description}</Card.Text>
-                                <Card.Text>Price: ${product.price}</Card.Text>
-                                <Button>Add Cart</Button>
-                            </Col>
-                        </Row>
+                            <Card.Text>Description: {product.description}</Card.Text>
+                            <Card.Text>Price: ${product.price}</Card.Text>
+                            <Button onClick={subtractQuantitiesProduc}>-</Button>   
 
-                  
+                            <div className="value">{quantitiesproduct}</div>
+                                                           
+                            <Button onClick={addQuantitiesProduc}>+</Button><br/>
+                            <Button>Add Cart</Button>
+                        </Col>
+                    </Row>
+
+
                 </ListGroup.Item>
-                
+
             </Card>
 
         </div >

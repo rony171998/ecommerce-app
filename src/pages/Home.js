@@ -31,6 +31,7 @@ const Home = () => {
       dispatch(filterProductsByName(id))
     }
      
+    console.log(products)
     return (
       <div>
         <Row >
@@ -42,7 +43,7 @@ const Home = () => {
               {
                 categories.categories?.map(category => (
   
-                  <ListGroup.Item key={category.id} onClick={() => selectCategory(category.id)}>
+                  <ListGroup.Item action key={category.id} onClick={() => selectCategory(category.id)}>
                     {category.name}
                   </ListGroup.Item>
                 ))
@@ -63,7 +64,12 @@ const Home = () => {
   
             <ListGroup>
               <Row xs={1} md={2} lg={3} >
-                {
+
+                {products.length === 0 ? 
+                
+                  <h1>Not Faunt Product</h1>
+                :
+                  
                   products?.map(product => (
                     <Col key={product.id}>
                       <ListGroup.Item >
@@ -83,7 +89,9 @@ const Home = () => {
                       </ListGroup.Item>
                     </Col>
                   ))
+                  
                 }
+                
               </Row>
   
             </ListGroup>

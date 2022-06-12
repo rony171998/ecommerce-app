@@ -30,7 +30,7 @@ const Footer = () => {
                     </div>
                     <div class="col">
                         <div class="card-body">
-                            <h4 class="card-header">Products</h4>
+                            <h4 class="card-header ">Products</h4>
                             <a class="card-link" href="https://e-commerce-rony.netlify.app/" target="_blank" rel="noopener noreferrer">
                                 <p class="card-text">E-commerce App</p>
                             </a>
