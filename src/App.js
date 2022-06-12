@@ -5,6 +5,7 @@ import { Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { LoadingScreen, NavBar, ProtectedRoutes } from "./components";
 import Memo from "./pages/Memo";
+import Footer from "./components/Footer";
 
 function App() {
   const isLoading = useSelector((state) => state.isLoading);
@@ -14,7 +15,13 @@ function App() {
       <Container>
         {isLoading && <LoadingScreen />}
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={
+           <>
+              <Home />
+              <Footer />
+            </>
+            }
+          />
           
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/login" element={<Login />} />
