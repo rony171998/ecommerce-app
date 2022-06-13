@@ -10,7 +10,7 @@ const ProductsDetail = () => {
     const [product, setProducts] = useState({});
     const [quantitiesproduct, setQuantitiesProducts] = useState(1);
 
-    const { register, handleSubmit } = useForm();
+    const { handleSubmit } = useForm();
 
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -36,8 +36,8 @@ const ProductsDetail = () => {
         setQuantitiesProducts(quantitiesproduct + 1)
     }
 
-    const submit = (data) => {
-        console.log(data);
+    const submit = () => {
+        const data = {id, quantity: quantitiesproduct}
         axios.post("https://ecommerce-api-react.herokuapp.com/api/v1/cart", data ,getConfig())
             .then((res) => {
                 console.log(res.data);
@@ -90,23 +90,9 @@ const ProductsDetail = () => {
 
                             <Card.Text>Description: {product.description}</Card.Text>
                             <Card.Text>Price: ${product.price}</Card.Text>
-
-                        </Col>
-                        <Col>
                             <Form onSubmit={handleSubmit(submit)}>
-
-                                <Form.Group controlId="formBasicId">
-                                    <Form.Label>{id}</Form.Label>
-                                    <Form.Control {...register("id")} 
-                                    type="Number"/>
-                                </Form.Group>
-
                                 <Form.Group controlId="formBasicQuantity">
-                                    <Form.Label>{quantitiesproduct}</Form.Label>
-                                    <Form.Control
-                                        {...register("quantity")}
-                                        type="Number"
-                                        value={quantitiesproduct} />
+                                    <Form.Label>Quantity: {quantitiesproduct}</Form.Label>
                                 </Form.Group>
 
                                 <Button onClick={subtractQuantitiesProduc}>-</Button>
@@ -114,6 +100,7 @@ const ProductsDetail = () => {
                                 <Button onClick={addQuantitiesProduc}>+</Button><br />
                                 <Button type="submit" >Add Cart</Button>
                             </Form>
+
                         </Col>
                     </Row>
 
