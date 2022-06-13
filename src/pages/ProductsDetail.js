@@ -3,11 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { filterCategory } from "../store/slices/products.slice";
-import { Button, Card, Col, ListGroup, Row, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import { Button, Card, Col, Form, ListGroup, Row, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import { useForm } from "react-hook-form";
 
 const ProductsDetail = () => {
     const [product, setProducts] = useState({});
     const [quantitiesproduct, setQuantitiesProducts] = useState(1);
+
+    const { register, handleSubmit } = useForm();
 
     const { id } = useParams();
     const dispatch = useDispatch();
@@ -32,6 +35,25 @@ const ProductsDetail = () => {
     const addQuantitiesProduc = () => {
         setQuantitiesProducts(quantitiesproduct + 1)
     }
+
+    const submit = (data) => {
+        console.log(data);
+        axios.post("https://ecommerce-api-react.herokuapp.com/api/v1/cart", data ,getConfig())
+            .then((res) => {
+                console.log(res.data);
+                alert("Agregado al carrito");
+            })
+            .catch((error) => {
+                console.log(error.response.data);
+                if (error.response.status === 401) {
+                    alert("error " + error.response.menssage);
+                }
+            });
+    };
+
+    const getConfig = () => ({
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+    });
 
 
     return (
@@ -68,12 +90,30 @@ const ProductsDetail = () => {
 
                             <Card.Text>Description: {product.description}</Card.Text>
                             <Card.Text>Price: ${product.price}</Card.Text>
-                            <Button onClick={subtractQuantitiesProduc}>-</Button>   
 
-                            <div className="value">{quantitiesproduct}</div>
-                                                           
-                            <Button onClick={addQuantitiesProduc}>+</Button><br/>
-                            <Button>Add Cart</Button>
+                        </Col>
+                        <Col>
+                            <Form onSubmit={handleSubmit(submit)}>
+
+                                <Form.Group controlId="formBasicId">
+                                    <Form.Label>{id}</Form.Label>
+                                    <Form.Control {...register("id")} 
+                                    type="Number"/>
+                                </Form.Group>
+
+                                <Form.Group controlId="formBasicQuantity">
+                                    <Form.Label>{quantitiesproduct}</Form.Label>
+                                    <Form.Control
+                                        {...register("quantity")}
+                                        type="Number"
+                                        value={quantitiesproduct} />
+                                </Form.Group>
+
+                                <Button onClick={subtractQuantitiesProduc}>-</Button>
+
+                                <Button onClick={addQuantitiesProduc}>+</Button><br />
+                                <Button type="submit" >Add Cart</Button>
+                            </Form>
                         </Col>
                     </Row>
 

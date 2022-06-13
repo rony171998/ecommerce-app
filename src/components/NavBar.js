@@ -36,7 +36,7 @@ const NavBar = () => {
                             <Card.Img style={{width :"25px"}} src='https://cdn-icons-png.flaticon.com/512/2127/2127209.png'></Card.Img>
                         </Nav.Link>
 
-                        <Nav.Link style={{textAlign:"right"}} href="/">
+                        <Nav.Link style={{textAlign:"right"}} href="#/purchases">
                             <Card.Img style={{width :"25px"}} src='https://cdn-icons-png.flaticon.com/512/6948/6948348.png'></Card.Img>
                         </Nav.Link>
                       
