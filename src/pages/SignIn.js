@@ -86,7 +86,7 @@ const SignIn = () => {
                     placeholder="Enter role"
                   />
                 </Form.Group>
-                <Button variant="primary" type="submit" onClick={navigate("/login")}>Sign up</Button>
+                <Button variant="primary" type="submit" onClick={ () => navigate("/login")}>Sign up</Button>
                 <br/><Form.Label>Already have an account? </Form.Label>
                 <a href="#/login"> Log in</a>
               </Form>

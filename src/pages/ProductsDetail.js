@@ -7,6 +7,7 @@ import { Button, Card, Col, Form, ListGroup, Row, ToggleButton, ToggleButtonGrou
 import { useForm } from "react-hook-form";
 
 const ProductsDetail = () => {
+
     const [product, setProducts] = useState({});
     const [quantitiesproduct, setQuantitiesProducts] = useState(1);
 
@@ -17,6 +18,7 @@ const ProductsDetail = () => {
     const [value, setValue] = useState(0);
 
     useEffect(() => {
+        
         axios.get("https://ecommerce-api-react.herokuapp.com/api/v1/products").then((res) => {
             const productsSearched = res.data.data.products.find(
                 (productsItem) => productsItem.id === Number(id)
@@ -37,18 +39,20 @@ const ProductsDetail = () => {
     }
 
     const submit = () => {
+
         const data = {id, quantity: quantitiesproduct}
         axios.post("https://ecommerce-api-react.herokuapp.com/api/v1/cart", data ,getConfig())
             .then((res) => {
-                console.log(res.data);
-                alert("Agregado al carrito");
+                alert("Agregado al carrito ", res.data.data.message);
+                console.log(res);
             })
             .catch((error) => {
-                console.log(error.response.data);
-                if (error.response.status === 401) {
-                    alert("error " + error.response.menssage);
+                console.log(error);
+                if (error.response.status < 399) {
+                    alert("error ");
                 }
             });
+
     };
 
     const getConfig = () => ({
@@ -66,7 +70,8 @@ const ProductsDetail = () => {
                         <Col>
                             <Card.Img
                                 src={product.productImgs?.[value]}
-                                style={{ maxwidth: "560px", maxHeight: "550px" }}>
+                                
+                                style={{ maxwidth: "560px", maxHeight: "550px",objectFit:"contain" }}>
 
                             </Card.Img>
                             <ToggleButtonGroup type="checkbox" value={value} >

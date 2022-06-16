@@ -11,7 +11,7 @@ export const productsSlice = createSlice({
         }
     }
 })
-export const { setProducts } = productsSlice.actions;
+export const { setProducts  } = productsSlice.actions;
 
 export const getProducts = () => (dispatch) => {
     dispatch(setIsLoading(true));
@@ -45,5 +45,22 @@ export const filterProductsByName = (name) => (dispatch) => {
         .finally(() => dispatch(setIsLoading(false)));      
 }
 
+const getConfig = () => ({
+    headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
+});
+
+export const getCarts = () => (dispatch) => {
+    dispatch(setIsLoading(true));
+    return axios.get("https://ecommerce-api-react.herokuapp.com/api/v1/cart", getConfig())
+        .then((res) => dispatch(setProducts(res.data.data.cart)))
+        .finally(() => dispatch(setIsLoading(false)));
+}
+
+export const postCart = (data) => (dispatch) => {
+    dispatch(setIsLoading(true));
+    return axios.post("https://ecommerce-api-react.herokuapp.com/api/v1/purchases", data, getConfig())
+        .then((res) => dispatch(alert(res.data.status)))
+        .finally(() => dispatch(setIsLoading(false)));
+}
 
 export default productsSlice.reducer;

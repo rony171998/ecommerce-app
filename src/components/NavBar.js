@@ -12,7 +12,7 @@ const NavBar = () => {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="#/favorites">Favorites</Nav.Link>
+                        {/* <Nav.Link href="#/favorites">Favorites</Nav.Link> */}
                         
                         <NavDropdown title="Products" id="basic-nav-dropdown" >
                             <NavDropdown.Item href="/">Smart TV</NavDropdown.Item>
@@ -36,9 +36,11 @@ const NavBar = () => {
                             <Card.Img style={{width :"25px"}} src='https://cdn-icons-png.flaticon.com/512/2127/2127209.png'></Card.Img>
                         </Nav.Link>
 
-                        <Nav.Link style={{textAlign:"right"}} href="#/purchases">
+                        <Nav.Link style={{textAlign:"right"}} href="#/cart">
                             <Card.Img style={{width :"25px"}} src='https://cdn-icons-png.flaticon.com/512/6948/6948348.png'></Card.Img>
                         </Nav.Link>
+
+                        <Nav.Link href="#/purchases">My Purcheses</Nav.Link>
                       
                     </Nav>
                 </Navbar.Collapse>
