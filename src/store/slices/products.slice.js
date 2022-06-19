@@ -45,6 +45,18 @@ export const filterProductsByName = (name) => (dispatch) => {
         .finally(() => dispatch(setIsLoading(false)));      
 }
 
+export const filterProductsByPrices = (priceMin , priceMax) => (dispatch) => {
+    dispatch(setIsLoading(true));
+    return axios.get("https://ecommerce-api-react.herokuapp.com/api/v1/products")
+        .then((res) => {
+        const productsSearched = res.data.data.products.filter(
+            (productsItem) => productsItem.price >= priceMin  && productsItem.price <= priceMax
+        );
+        dispatch(setProducts(productsSearched));
+        })
+        .finally(() => dispatch(setIsLoading(false)));      
+}
+
 const getConfig = () => ({
     headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
 });

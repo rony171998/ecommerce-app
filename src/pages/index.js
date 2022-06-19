@@ -4,3 +4,7 @@ export { default as Login } from "./Login";
 export { default as NewsDetail } from "./NewsDetail";
 export { default as ProductsDetail } from "./ProductsDetail";
 export { default as SignIn } from "./SignIn";
+export { default as Purchases } from "./Purchases";
+export { default as Cart } from "./Cart";
+export { default as PurchaseData } from "./PurchaseData";
+export { default as News } from "./News";

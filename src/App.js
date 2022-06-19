@@ -1,13 +1,12 @@
-import { Home,SignIn, Favorites, Login, NewsDetail,ProductsDetail } from "./pages";
+import { Home,SignIn, Favorites, Login, NewsDetail,ProductsDetail,News , PurchaseData ,Purchases ,Cart } from "./pages";
 import "./styles.css";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { LoadingScreen, NavBar, ProtectedRoutes } from "./components";
-import Footer from "./components/Footer";
-import Purchases from "./pages/Purchases";
-import Cart from "./pages/Cart";
-import PurchaseData from "./pages/PurchaseData";
+import { LoadingScreen, NavBar, ProtectedRoutes,Footer } from "./components";
+
+
+
 
 function App() {
   const isLoading = useSelector((state) => state.isLoading);
@@ -28,6 +27,7 @@ function App() {
           <Route path="/favorites" element={<Favorites />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signin" element={<SignIn />} />
+          <Route path="/news" element={<News />} />
           <Route element={<ProtectedRoutes />}> 
 
            <Route path="/news/:id" element={<NewsDetail />} />
