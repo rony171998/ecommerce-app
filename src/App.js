@@ -1,4 +1,4 @@
-import { Home,SignIn, Favorites, Login, NewsDetail,ProductsDetail,News , PurchaseData ,Purchases ,Cart } from "./pages";
+import { Home,SignIn, Favorites, Login, NewsDetail,ProductsDetail,News , PurchaseData ,Purchases ,Cart ,User } from "./pages";
 import "./styles.css";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
@@ -35,6 +35,7 @@ function App() {
            <Route path="/purchases" element={<Purchases />} />
            <Route path="/cart" element={<Cart />} />
            <Route path="/cart/formdata" element={<PurchaseData />} />
+           <Route path="/user" element={<User />} />
 
           </Route>
         </Routes>

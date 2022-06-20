@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { filterCategory } from "../store/slices/news.slice";
 
+
 const NewsDetail = () => {
   const [news, setNews] = useState({});
 
@@ -13,11 +14,7 @@ const NewsDetail = () => {
   const newsList = useSelector((state) => state.news);
 
   useEffect(() => {
-    // axios.get(`https://news-app-academlo.herokuapp.com/news/${id}/`)
-    //     .then(res => {
-    //         setNews(res.data);
-    //         dispatch(filterCategory(res.data.category.id));
-    //     });
+    
     axios.get("https://news-app-academlo.herokuapp.com/news/").then((res) => {
       const newsSearched = res.data.find(
         (newsItem) => newsItem.id === Number(id)

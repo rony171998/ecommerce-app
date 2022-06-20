@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { filterCategory } from "../store/slices/products.slice";
+import { filterCategory, addProductsToCart } from "../store/slices/products.slice";
 import { Button, Card, Col, Form, ListGroup, Row, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 
@@ -39,26 +39,8 @@ const ProductsDetail = () => {
     }
 
     const submit = () => {
-
-        const data = {id, quantity: quantitiesproduct}
-        axios.post("https://ecommerce-api-react.herokuapp.com/api/v1/cart", data ,getConfig())
-            .then((res) => {
-                alert("Agregado al carrito ", res.data.data.message);
-                console.log(res);
-            })
-            .catch((error) => {
-                console.log(error);
-                if (error.response.status < 399) {
-                    alert("error ");
-                }
-            });
-
+        dispatch(addProductsToCart(id, quantitiesproduct));
     };
-
-    const getConfig = () => ({
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-    });
-
 
     return (
         <div>

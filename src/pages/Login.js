@@ -2,12 +2,11 @@ import React from "react";
 import { Button, Card, Form } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
 
   const { register, handleSubmit } = useForm();
-  const navigate = useNavigate();
+
 
   const submit = (data) => {
     axios
@@ -23,6 +22,7 @@ const Login = () => {
           alert("Credenciales incorrectas");
         }
       });
+
   };
 
   return (
@@ -56,7 +56,7 @@ const Login = () => {
                 placeholder="Password"
               />
             </Form.Group>
-            <Button variant="primary" type="submit" onClick={ () => navigate("/")}>
+            <Button variant="primary" type="submit">
               Login
             </Button><br />
             <Form.Label>Don't have an account? </Form.Label>

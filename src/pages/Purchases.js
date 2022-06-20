@@ -5,7 +5,6 @@ import { Card } from 'react-bootstrap';
 const Purchases = () => {
 
     const [purchases, setPurchases] = useState({});
-    const [valorTotal, setValorTotal] = useState(0);
 
     useEffect(() => {
         axios.get("https://ecommerce-api-react.herokuapp.com/api/v1/purchases", getConfig()).then((res) => {
@@ -16,12 +15,7 @@ const Purchases = () => {
     const getConfig = () => ({
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     });
-
-    const getValorTotal = (price) => {
-        setValorTotal(valorTotal + price);
-    }
-
-    //console.log(purchases);
+    
 
     return (
         <div>
@@ -30,10 +24,12 @@ const Purchases = () => {
                 <Card.Header>
                     <Card.Title>Purchases</Card.Title>
                 </Card.Header>
+                
             </Card>
 
             <table className="table table-hover">
 
+                
                 <thead>
 
                     <tr>
@@ -44,6 +40,7 @@ const Purchases = () => {
                     </tr>
 
                 </thead>
+                
                 {
 
                     purchases.data?.purchases.map((purchaseItem) => (
@@ -58,33 +55,21 @@ const Purchases = () => {
                                 </tr>
 
                                 :
-
+                                
                                 purchaseItem.cart?.products.map((purchaseItem) => (
 
                                     <tr className="table-light" key={purchaseItem.id} >
-
+                                        
                                         <td >{purchaseItem.title}</td>
                                         <td >{purchaseItem.productsInCart?.quantity}</td>
                                         <td>$ {purchaseItem.price}</td>
                                         <td>$ {purchaseItem.productsInCart?.quantity * purchaseItem.price}.00
                                         </td>
-                                        {
-                                            () => getValorTotal(purchaseItem.productsInCart.quantity * purchaseItem.price)
-                                        }
 
                                     </tr>
 
                                 ))
-                            }
-
-                            <tr>
-
-                                <td>Total </td>
-                                <td></td>
-                                <td></td>
-                                <td>$ {valorTotal}</td>
-
-                            </tr>
+                            }<td> Created: {purchaseItem.createdAt.substr(0,10)}</td>
 
                         </tbody>
 

@@ -2,8 +2,12 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Card } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { DelProductsToCart} from "../store/slices/products.slice";
 
 const Cart = () => {
+
+    const dispatch = useDispatch();
 
     const [cart, setCart] = useState({});
     const [valorTotal, setValorTotal] = useState(0);
@@ -26,6 +30,10 @@ const Cart = () => {
 
     const getValorTotal = (price) => {
         setValorTotal(valorTotal + price);
+    }
+
+    const removeItem = (id) => {
+        dispatch(DelProductsToCart(id));
     }
 
     console.log(cart);
@@ -69,6 +77,7 @@ const Cart = () => {
                                 {
                                     () => getValorTotal(cartItem.productsInCart.quantity * cartItem.price)
                                 }
+                                <Button variant="primary" onClick={() => removeItem(cartItem.id)}>Delete</Button>
 
                             </tr>
 

@@ -20,6 +20,28 @@ export const getProducts = () => (dispatch) => {
         .finally(() => dispatch(setIsLoading(false)));
 }
 
+export const addProductsToCart = (id,quantity) => (dispatch) => {
+    const data = {id, quantity}
+    dispatch(setIsLoading(true));
+    return axios.post("https://ecommerce-api-react.herokuapp.com/api/v1/cart" , data, getConfig())
+        .then((res) => dispatch(alert(res.data.status)))
+        .finally(() => dispatch(setIsLoading(false)));
+}
+export const pachProductsToCart = (id,quantity) => (dispatch) => {
+    const data = {id, newQuantity: quantity}
+    dispatch(setIsLoading(true));
+    return axios.patch("https://ecommerce-api-react.herokuapp.com/api/v1/cart" , data, getConfig())
+        .then((res) => dispatch(alert(res.data.status)))
+        .finally(() => dispatch(setIsLoading(false)));
+}
+export const DelProductsToCart = (id) => (dispatch) => {
+    dispatch(setIsLoading(true));
+    return axios.delete(`https://ecommerce-api-react.herokuapp.com/api/v1/cart/=${id}` , getConfig())
+        .then((res) => dispatch(alert(res.data.status)))
+        .finally(() => dispatch(setIsLoading(false)));
+}
+
+
 export const filterCategory = (id) => (dispatch) => {
     dispatch(setIsLoading(true));
     return axios.get(`https://ecommerce-api-react.herokuapp.com/api/v1/products`)

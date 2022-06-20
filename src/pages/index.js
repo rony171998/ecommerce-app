@@ -8,3 +8,4 @@ export { default as Purchases } from "./Purchases";
 export { default as Cart } from "./Cart";
 export { default as PurchaseData } from "./PurchaseData";
 export { default as News } from "./News";
+export { default as User } from "./User";

@@ -11,12 +11,7 @@ import {
     Row,
 } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {
-    filterCategory,
-    filterProductsByName,
-    filterProductsByPrices,
-    getProducts,
-} from "../store/slices/products.slice";
+import { filterCategory, filterProductsByName, filterProductsByPrices, getProducts ,addProductsToCart ,pachProductsToCart} from "../store/slices/products.slice";
 import { Weather } from "../components";
 
 const Home = () => {
@@ -27,6 +22,7 @@ const Home = () => {
     const [search, setSearch] = useState("");
     const [priceRangeMin, setPriceRangeMin] = useState(0);
     const [priceRangeMax, setPriceRangeMax] = useState(1000);
+    const [quantity, setQuantity] = useState(1);
 
     let products = useSelector(state => state.products);
 
@@ -52,6 +48,18 @@ const Home = () => {
       dispatch(filterProductsByPrices(priceRangeMin, priceRangeMax));
       console.log(priceRangeMin, priceRangeMax);
     } 
+
+    const addToCard = (id) => {
+        setQuantity(quantity + 1);
+        if (quantity === 1) {
+            console.log(quantity);
+            dispatch(addProductsToCart(id, quantity));
+        }else{
+            console.log(quantity);
+            dispatch(pachProductsToCart(id, quantity));
+        }
+        
+    }
 
     //console.log(products)
     return (
@@ -173,9 +181,7 @@ const Home = () => {
                                                     variant="primary"
                                                     size="sm"
                                                     onClick={() =>
-                                                        navigate(
-                                                            `/products/${product.id}`
-                                                        )
+                                                        addToCard(product.id)
                                                     }
                                                 >
                                                     Add Cart

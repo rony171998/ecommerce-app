@@ -13,6 +13,10 @@ const SignIn = () => {
       .post("https://ecommerce-api-react.herokuapp.com/api/v1/users", data)
       .then((res) => {
         localStorage.setItem("token", res.data.access);
+        localStorage.setItem("name", res.data.firstname+ " " + res.data.lastname);
+        localStorage.setItem("email", res.data.email);
+        localStorage.setItem("phone", res.data.phone);
+        localStorage.setItem("role", res.data.role);
         alert("Registrado correctamente");
         console.log(data)
       })

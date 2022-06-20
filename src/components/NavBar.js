@@ -28,6 +28,7 @@ const NavBar = () => {
                         </Nav.Link>
 
                         <NavDropdown title="User" id="basic-nav-dropdown" >
+                            <NavDropdown.Item href="#/User">Profile</NavDropdown.Item>
                             <NavDropdown.Divider />
                             <NavDropdown.Item href="#/login">Login</NavDropdown.Item>
                             <NavDropdown.Item href="#/signin">Sign Up</NavDropdown.Item>
