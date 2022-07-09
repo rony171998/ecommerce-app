@@ -36,7 +36,7 @@ export const pachProductsToCart = (id,quantity) => (dispatch) => {
 }
 export const DelProductsToCart = (id) => (dispatch) => {
     dispatch(setIsLoading(true));
-    return axios.delete(`https://ecommerce-api-react.herokuapp.com/api/v1/cart/=${id}` , getConfig())
+    return axios.delete(`https://ecommerce-api-react.herokuapp.com/api/v1/cart/${id}` , getConfig())
         .then((res) => dispatch(alert(res.data.status)))
         .finally(() => dispatch(setIsLoading(false)));
 }
@@ -86,7 +86,7 @@ const getConfig = () => ({
 export const getCarts = () => (dispatch) => {
     dispatch(setIsLoading(true));
     return axios.get("https://ecommerce-api-react.herokuapp.com/api/v1/cart", getConfig())
-        .then((res) => dispatch(setProducts(res.data.data.cart)))
+        .then((res) => dispatch(setProducts(res.data.data)))
         .finally(() => dispatch(setIsLoading(false)));
 }
 

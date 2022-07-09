@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { filterCategory, addProductsToCart } from "../store/slices/products.slice";
 import { Button, Card, Col, Form, ListGroup, Row, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
+import { SimilarProducts } from "../components";
 
 const ProductsDetail = () => {
 
@@ -45,7 +46,7 @@ const ProductsDetail = () => {
     return (
         <div>
 
-            <Card>
+            <Card className="mb-2">
                 <ListGroup.Item key={product.id}>
 
                     <Row>
@@ -56,7 +57,7 @@ const ProductsDetail = () => {
                                 style={{ maxwidth: "560px", maxHeight: "550px",objectFit:"contain" }}>
 
                             </Card.Img>
-                            <ToggleButtonGroup type="checkbox" value={value} >
+                            <ToggleButtonGroup className="mt-1" type="checkbox" value={value} style={{marginLeft:"20%"}} >
                                 <ToggleButton id="toggle-check" onClick={() => setValue(0)}
                                     type="checkbox" value={1}>
                                     Photo 1
@@ -95,6 +96,10 @@ const ProductsDetail = () => {
                 </ListGroup.Item>
 
             </Card>
+            <SimilarProducts 
+                IdCategory={product.category?.id}
+                Id={id}
+             />
 
         </div >
     );

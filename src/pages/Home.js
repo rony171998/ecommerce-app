@@ -61,13 +61,14 @@ const Home = () => {
         
     }
 
-    //console.log(products)
+    console.log(products)
     return (
         <div>
             <Row>
-                <Col lg={3}>
-                    <h2>Categories</h2>
-                    <ListGroup className="mb-3">
+                <Col lg={3} className="mb-3">
+                    
+                    <ListGroup className="mb-3 mt-3">
+                        <Card.Header>Categories</Card.Header>
                         {categories.categories?.map(category => (
                             <ListGroup.Item
                                 action
@@ -80,9 +81,10 @@ const Home = () => {
                     </ListGroup >
                     
                     <ListGroup className="mb-3">
+                        <Card.Header>Rango de precios</Card.Header>
 
                         <ListGroup.Item >
-                            <Card.Title>Rango de precios</Card.Title>
+                            
 
                             <InputGroup className="mb-3">
                               <FormControl
@@ -114,7 +116,7 @@ const Home = () => {
 
                 </Col>
                 <Col>
-                    <InputGroup className="mb-4 mt-4">
+                    <InputGroup className="mb-2 mt-3">
                         <FormControl
                             placeholder="Search products"
                             onChange={e => setSearch(e.target.value)}

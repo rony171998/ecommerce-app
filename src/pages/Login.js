@@ -21,6 +21,9 @@ const Login = () => {
         if (error.response.status === 401) {
           alert("Credenciales incorrectas");
         }
+        if (error.response.status === 404) {
+          alert("No existe el usuario");
+        }
       });
 
   };

@@ -17,8 +17,9 @@ const Weather = () => {
 
     return (
         <Card className="Weather">
+            <Card.Header>Weather</Card.Header>
             <Card.Body>
-                <Card.Title>Weather</Card.Title>
+                
                 <Card.Text>{Weather.name} ,{Weather.sys?.country}</Card.Text>
                 
                 <Card.Img

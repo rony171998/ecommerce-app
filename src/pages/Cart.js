@@ -1,42 +1,28 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Button, Card } from 'react-bootstrap';
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { DelProductsToCart} from "../store/slices/products.slice";
+import { useDispatch , useSelector } from "react-redux";
+import { DelProductsToCart ,getCarts } from "../store/slices/products.slice";
 
 const Cart = () => {
 
     const dispatch = useDispatch();
 
-    const [cart, setCart] = useState({});
-    const [valorTotal, setValorTotal] = useState(0);
+    let cart = useSelector(state => state.products);
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get("https://ecommerce-api-react.herokuapp.com/api/v1/cart", getConfig())
-        .then((res) => {
-            setCart(res.data.data);
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-    }, []);
+        dispatch(getCarts());
+    }, [dispatch]);
 
-    const getConfig = () => ({
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
-    });
-
-    const getValorTotal = (price) => {
-        setValorTotal(valorTotal + price);
-    }
 
     const removeItem = (id) => {
         dispatch(DelProductsToCart(id));
+        dispatch(getCarts());
     }
 
-    console.log(cart);
+    //console.log(cart);
 
     return (
         <div>
@@ -67,16 +53,14 @@ const Cart = () => {
                     {
                         cart.cart?.products.map((cartItem) => (
 
-                            <tr className="table-light" key={cartItem.id} >
+                            <tr className="table-light " key={cartItem.id} >
 
                                 <td >{cartItem.title}</td>
                                 <td >{cartItem.productsInCart?.quantity}</td>
                                 <td>$ {cartItem.price}</td>
                                 <td>$ {cartItem.productsInCart?.quantity * cartItem.price}.00
                                 </td>
-                                {
-                                    () => getValorTotal(cartItem.productsInCart.quantity * cartItem.price)
-                                }
+                                
                                 <Button variant="primary" onClick={() => removeItem(cartItem.id)}>Delete</Button>
 
                             </tr>
@@ -85,22 +69,12 @@ const Cart = () => {
 
                     }
 
-                    <tr>
-
-                        <td>Total </td>
-                        <td></td>
-                        <td></td>
-                        <td>$ {valorTotal}</td>
-
-                    </tr>
 
                 </tbody>
 
                 <Button onClick={() => navigate("/cart/formdata")}>Chekout</Button>
             </table>
             }
-
-            
 
 
         </div >
