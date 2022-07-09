@@ -5,7 +5,7 @@ import { Button, Card, Col, FormControl, InputGroup, ListGroup, Row } from 'reac
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const news = () => {
+const News = () => {
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -20,7 +20,7 @@ const news = () => {
 
         axios.get("https://news-app-academlo.herokuapp.com/categories/")
             .then(res => setCategories(res.data))
-    }, []);
+    }, [dispatch]);
 
     const filterNews = () => {
         dispatch(filterHeadline(search));
@@ -89,4 +89,4 @@ const news = () => {
     );
 };
 
-export default news;
+export default News;
